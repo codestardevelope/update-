@@ -1,20 +1,20 @@
-// main.js
 import { Actor } from 'apify';
 
 await Actor.init();
 
-// Get the input data
 const input = await Actor.getInput();
-console.log('Actor input:');
-console.log(input);
+console.log('Actor input:', JSON.stringify(input, null, 2));
 
 const { apifyApiToken, linkedin, indeed } = input;
 
-// TODO: Implement the logic to trigger the sub-actors based on the input
-// You will need the Apify API token to run other actors.
-// Check which actors are enabled (linkedin.actor1.enabled, linkedin.actor2.enabled, indeed.actor1.enabled)
-// and get their specific inputs (linkedin.actor1.input, etc.).
+if (linkedin?.actor1?.enabled) {
+    console.log('Would trigger LinkedIn Actor 1 with input:', linkedin.actor1.input);
+}
+if (linkedin?.actor2?.enabled) {
+    console.log('Would trigger LinkedIn Actor 2 with input:', linkedin.actor2.input);
+}
+if (indeed?.actor1?.enabled) {
+    console.log('Would trigger Indeed Actor 1 with input:', indeed.actor1.input);
+}
 
-console.log('Fetching input done.');
-
-await Actor.exit(); 
+await Actor.exit();
